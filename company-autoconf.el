@@ -95,9 +95,11 @@
 (defun company-autoconf-location (candidate)
   "Jump to CANDIDATE documentation in browser."
   (when-let* ((idx (get-text-property 0 'index candidate)))
-    (browse-url
-     (concat (nth idx company-autoconf-urls)
-             (get-text-property 0 'href candidate)))))
+    ;; TODO: ..
+    ;;(browse-url
+    ;; (concat (nth idx company-autoconf-urls)
+    ;;         (get-text-property 0 'href candidate)))
+    ))
 
 ;;;###autoload
 (defun company-autoconf (command &optional arg &rest _args)
