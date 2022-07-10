@@ -1,11 +1,11 @@
-;;; company-autoconf.el --- completion for autoconf script -*- lexical-binding: t; -*-
+;;; company-autoconf.el --- completion for autoconf script  -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2016, Noah Peart
+;; Copyright (C) 2022, Jen-Chieh Shen
 
 ;; Author: Noah Peart <noah.v.peart@gmail.com>
-;; URL: https://github.com/nverno/company-autoconf
-;; Package-Requires: 
-;; Last modified: <2019-03-07 23:31:52>
-;; Copyright (C) 2016, Noah Peart, all rights reserved.
-;; Created: 21 September 2016
+;; URL: https://github.com/elp-revive/company-autoconf
+;; Package-Requires: ((emacs "26.1") (company "0.8.12"))
 
 ;; This file is not part of GNU Emacs.
 ;;
@@ -32,8 +32,10 @@
 ;;  for autoconf/automake macros and jumps html documentation for company doc-buffer.
 
 ;;; Code:
+
 (eval-when-compile
   (require 'cl-lib))
+
 (require 'company)
 
 (defgroup company-autoconf nil
@@ -63,17 +65,17 @@
 (defvar company-autoconf-keywords
   (let ((data (company-autoconf-load
                (expand-file-name company-autoconf-data-file company-autoconf-dir))))
-    (setq company-autoconf-urls 
+    (setq company-autoconf-urls
           (cl-loop for url across (cdr (assoc-string "roots" data))
-             collect (concat (car (split-string url "html_node")) "html_node/")))
+                   collect (concat (car (split-string url "html_node")) "html_node/")))
     (sort
      (cl-loop for (k . v) in data
-        unless (string= k "roots")
-        do
-          (put-text-property 0 1 'annot (aref v 1) k)
-          (put-text-property 0 1 'href (aref v 0) k)
-          (put-text-property 0 1 'index (aref v 2) k)
-        collect k)
+              unless (string= k "roots")
+              do
+              (put-text-property 0 1 'annot (aref v 1) k)
+              (put-text-property 0 1 'href (aref v 0) k)
+              (put-text-property 0 1 'index (aref v 2) k)
+              collect k)
      'string<)))
 
 (defun company-autoconf-prefix ()
@@ -93,9 +95,9 @@
 (defun company-autoconf-location (candidate)
   "Jump to CANDIDATE documentation in browser."
   (when-let* ((idx (get-text-property 0 'index candidate)))
-   (browse-url
-    (concat (nth idx company-autoconf-urls)
-            (get-text-property 0 'href candidate)))))
+    (browse-url
+     (concat (nth idx company-autoconf-urls)
+             (get-text-property 0 'href candidate)))))
 
 ;;;###autoload
 (defun company-autoconf (command &optional arg &rest _args)
@@ -112,5 +114,4 @@
     (sorted t)))
 
 (provide 'company-autoconf)
-
 ;;; company-autoconf.el ends here
