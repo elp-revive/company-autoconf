@@ -4,8 +4,11 @@
 ;; Copyright (C) 2022, Jen-Chieh Shen
 
 ;; Author: Noah Peart <noah.v.peart@gmail.com>
+;; Maintainer: Jen-Chieh Shen <jcs090218@gmail.com>
+;; Version: 0.0.1
 ;; URL: https://github.com/elp-revive/company-autoconf
 ;; Package-Requires: ((emacs "26.1") (company "0.8.12"))
+;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 ;;
@@ -33,8 +36,7 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl-lib))
+(eval-when-compile (require 'cl-lib))
 
 (require 'company)
 
