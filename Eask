@@ -7,6 +7,8 @@
 
 (package-file "company-autoconf.el")
 
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (source "gnu")
 (source "melpa")
 
