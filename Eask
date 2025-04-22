@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "company-autoconf"
          "0.0.1"
          "completion for autoconf script")
